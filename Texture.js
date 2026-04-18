@@ -1,4 +1,4 @@
-import Vector4 from "https://f1redood.github.io/Threed/Vector4.js";
+import Vector4 from "https://f1redude123.github.io/Threed/Vector4.js";
 
 export default class Texture {
   width;
@@ -9,7 +9,7 @@ export default class Texture {
   static fromURL(url, filterMode = 0) {
     return new Promise((r, e) => {
       var img = new Image();
-      img.crossOrigin = "Anonymous";
+      img.crossOrigin = "anonymous";
       img.onload = function() {
         var data = Texture.#create(this);
         var tex = new Texture();
