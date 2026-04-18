@@ -1,6 +1,6 @@
-import Vector2 from "https://f1redood.github.io/Threed/Vector2.js";
-import Vector3 from "https://f1redood.github.io/Threed/Vector3.js";
-import Vector4 from "https://f1redood.github.io/Threed/Vector4.js";
+import Vector2 from "https://f1redude123.github.io/Threed/Vector2.js";
+import Vector3 from "https://f1redude123.github.io/Threed/Vector3.js";
+import Vector4 from "https://f1redude123.github.io/Threed/Vector4.js";
 
 export default class RenderBuffer {
   #shaderProperties = {};
@@ -21,11 +21,15 @@ export default class RenderBuffer {
     this.#shaderProperties[key] = value;
   }
 
+  #toBlitSpace(clipSpace) {
+    return new Vector2((clipSpace.x / 2 + 1) * this.scene.canvas.width, (clipSpace.y / 2 + 1) * this.scene.canvas.height);
+  }
+
   render() {
     /* VERTEX PARSING */
     var newVerts = [];
     for (var v = 0; v < this.verts.length; v++) {
-      newVerts.push(this.shader.program.vert({ ...this.#shaderProperties, aPos: this.verts[v], position: Vector3.ZERO }).position);
+      newVerts.push(this.#toBlitSpace(this.shader.program.vert({ ...this.#shaderProperties, aPos: this.verts[v], position: Vector3.ZERO }).position));
     }
 
     /* FRAGMENT PARSING */
